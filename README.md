@@ -1,14 +1,7 @@
 # homenetwork
-## 参考文献
-### Docker
-- [Docker Docs](https://docs.docker.com/)
-- [Raspberry Piでlinux/amd64のDockerコンテナーを動かす | Takeshi Yonezu](https://tkyonezu.com/iot/raspberry-pi%E3%81%A7linux-amd64%E3%81%AEdocker%E3%82%B3%E3%83%B3%E3%83%86%E3%83%8A%E3%83%BC%E3%82%92%E5%8B%95%E3%81%8B%E3%81%99/)
-
-### Ansible
-- [Ansible.Builtin — Ansible Documentation](https://docs.ansible.com/ansible/latest/collections/ansible/builtin/index.html)
-- [Community.Docker — Ansible Documentation](https://docs.ansible.com/ansible/latest/collections/community/docker/index.html)
-- [Ansible の使い方](https://zenn.dev/y_mrok/books/ansible-no-tsukaikata)
-- [Ansible チートシート](./docs/ansible.md)
+## 学習記録
+- [Ansible](./docs/ansible.md)
+- [Docker](./docs/docker.md)
 
 ## ネットワーク設計
 
