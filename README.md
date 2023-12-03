@@ -8,7 +8,7 @@
 - [Ansible.Builtin — Ansible Documentation](https://docs.ansible.com/ansible/latest/collections/ansible/builtin/index.html)
 - [Community.Docker — Ansible Documentation](https://docs.ansible.com/ansible/latest/collections/community/docker/index.html)
 - [Ansible の使い方](https://zenn.dev/y_mrok/books/ansible-no-tsukaikata)
-- [Ansible チートシート](./ansible.md)
+- [Ansible チートシート](./docs/ansible.md)
 
 ## ネットワーク設計
 
