@@ -1,0 +1,59 @@
+version: '3.9'
+services:
+  contents_server: # [The-Kube-Way/nsd: Running NSD on Kubernetes](https://github.com/The-Kube-Way/nsd)
+    platform: linux/x86_64 # raspberry pi 上で動かすために必要
+    image: ghcr.io/the-kube-way/nsd:latest
+    container_name: dns4.0
+    hostname: dns4.0
+    restart: always
+    tmpfs:
+      - /tmp
+      - /var/db/nsd
+    volumes:
+      - ./config/nsd.conf:/etc/nsd/nsd.conf:ro
+      - ./zones:/zones:ro # ヘルパースクリプトを使わないため読み取り専用でいいらしい
+      - ./keys:/keys:ro
+      - /etc/localtime:/etc/localtime:ro
+    networks:
+      proxy145: { ipv4_address: 10.145.4.103 }
+
+  #box_dns:
+  #  image: busybox
+  #  container_name: box_dns
+  #  hostname: box_dns
+  #  tty: true
+
+
+  full_resolver:
+    build:
+      context: './full-resolver'
+      dockerfile: Dockerfile
+    container_name: dns4.1
+    hostname: dns4.1
+    restart: always
+    volumes:
+      - '/etc/unbound'
+      - './config/unbound.conf:/etc/unbound/unbound.conf.d/server.conf'
+      # './full_resolver:/etc/unbound/unbound.conf.d'
+    #command: /usr/sbin/unbound
+    command: "/usr/sbin/unbound"
+    networks:
+      proxy145: { ipv4_address: 10.145.4.102 }
+    #command: "/usr/sbin/unbound-checkconf; /usr/sbin/unbound"
+    #    ports:
+    #        - "53:53/tcp"
+    #        - "53:53/udp"
+    #    #command: /usr/sbin/unbound
+    #    command: "/usr/sbin/unbound"
+    #    #command: "/usr/sbin/unbound-checkconf; /usr/sbin/unbound"
+    #    #networks:
+    #    #    dns_network:
+    #    #        ipv4_address: 172.114.19.2
+
+networks:
+  proxy145:
+    name: proxy145
+    external: true
+
+
+

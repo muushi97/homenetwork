@@ -1,0 +1,16 @@
+$ORIGIN maccarello.home.
+$TTL 86400
+
+@ IN SOA ns1.maccarello.home. hostmaster.maccarello.home. (
+                2021033101      ; serial
+                28800           ; refresh
+                7200            ; retry
+                86400           ; expire
+                86400           ; min TTL
+                )
+
+                NS              ns1.maccarello.home.
+                NS              ns2.maccarello.home.
+
+@               A               10.0.2.2
+hercules        A               10.145.4.210

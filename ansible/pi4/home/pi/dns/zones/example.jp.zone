@@ -1,0 +1,16 @@
+$ORIGIN example.jp.
+$TTL 86400
+
+@ IN SOA ns1.example.jp. hostmaster.example.jp. (
+                2021033101      ; serial
+                28800           ; refresh
+                7200            ; retry
+                86400           ; expire
+                86400           ; min TTL
+                )
+
+                NS              ns1.example.jp.
+                NS              ns2.example.jp.
+
+@               A               192.0.2.2
+www             A               192.0.2.3

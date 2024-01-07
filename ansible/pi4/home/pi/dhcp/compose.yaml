@@ -1,0 +1,23 @@
+version: "3.9"
+services: # referenced wget https://gitlab.isc.org/isc-projects/kea-docker
+  dhcp4.0:
+    image: docker.cloudsmith.io/isc/docker/kea-dhcp4:2.5.3
+    container_name: kea4.0
+    hostname: kea4.0
+    restart: always
+    tty: true
+    volumes:
+    - type: bind
+      source: ./config
+      target: /etc/kea
+    - kea4-var:/var/lib/kea
+    networks:
+      proxy145: { ipv4_address: 10.145.4.101 }
+
+volumes:
+  kea4-var:
+
+networks:
+  proxy145:
+    name: proxy145
+    external: true

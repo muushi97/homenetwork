@@ -1,0 +1,28 @@
+version: "3.9"
+services:
+  router4.0:
+    image: frrouting/frr:v8.4.0
+    container_name: rounter4.0
+    hostname: router4.0
+    cap_add:
+    - ALL
+    # NET_ADMIN
+    volumes:
+      - ./frr/daemons:/etc/frr/daemons
+      - ./frr/vtysh.conf:/etc/frr/vtysh.conf
+      - ./frr/frr.conf:/etc/frr/frr.conf
+    networks:
+      proxy145: { ipv4_address: 10.145.4.200 }
+
+  box4.0:
+    image: busybox
+    container_name: box4.0
+    hostname: box4.0
+    tty: true
+    networks:
+      proxy145: { ipv4_address: 10.145.4.201 }
+
+networks:
+  proxy145:
+    name: proxy145
+    external: true
