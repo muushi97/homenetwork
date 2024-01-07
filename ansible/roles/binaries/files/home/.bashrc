@@ -61,5 +61,10 @@ if ! shopt -oq posix; then
   fi
 fi
 
+# Docker 用に alias を定義する
+alias dps='docker ps --format "table {{.ID}}\t{{.Names}}\t{{.CreatedAt}}\t{{.Status}}\t{{.Ports}}"'
+alias dcupd='docker compose up -d'
+alias dcdown='docker compose down'
+
 # PATh を通す
 PATH=$PATH:$HOME/bin
