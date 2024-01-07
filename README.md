@@ -1,7 +1,20 @@
 # homenetwork
 ## 学習記録
+- [Namespace](./docs/namespace.md)
+    - `ip tap` コマンド
 - [Ansible](./docs/ansible.md)
 - [Docker](./docs/docker.md)
+- [Kea](./docs/kea.md)
+    - DHCP サーバ
+- [NSD](./docs/nsd.md)
+    - 権威 DNS サーバ
+- [Unbound](./docs/unbound.md)
+    - キャッシュ DNS サーバ
+- [Nginx](./docs/nginx.md)
+    - リバースプロキシサーバ
+    - HTTP サーバ
+
+
 
 ## ネットワーク設計
 
