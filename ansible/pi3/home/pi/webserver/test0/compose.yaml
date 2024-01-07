@@ -1,0 +1,14 @@
+version: "3.9"
+services:
+  nginx3.0:
+    image: nginx:latest
+    container_name: nginx3.0
+    hostname: nginx3.0
+    volumes: [ ./nginx3.0.html:/usr/share/nginx/html/index.html ]
+    networks:
+      proxy145: { ipv4_address: 10.145.3.220 }
+
+networks:
+  proxy145:
+    name: proxy145
+    external: true
