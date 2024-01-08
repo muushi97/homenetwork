@@ -17,7 +17,12 @@ ansible-playbook "${PLAYBOOK}" --list-hosts
 
 ## playbook の実行
 ```shell
-ansible-playbook -i "${INVENTORY}" "${PLAYBOOK}" -u "${REMOTE_USER}" -t "${TASK} -vvv --ask-pass
+ansible-playbook -i "${INVENTORY}" "${PLAYBOOK}" -u "${REMOTE_USER}" -vvv --ask-pass
+```
+
+### タグを指定した実行
+```shell
+ansible-playbook -i "${INVENTORY}" "${PLAYBOOK}" -u "${REMOTE_USER}" -t "${TAG1},${TAG2}" -vvv --ask-pass
 ```
 
 # 参考文献
