@@ -12,7 +12,55 @@ services:
       - ./frr/vtysh.conf:/etc/frr/vtysh.conf
       - ./frr/frr.conf:/etc/frr/frr.conf
     networks:
-      proxy145: { ipv4_address: 10.145.4.200 }
+      proxy145:  { ipv4_address: 10.145.4.200 }
+      overlay12: { ipv4_address: 10.28.12.100 }
+
+  # https://en.wikipedia.org/wiki/Classical_element
+
+  earth:
+    image: frrouting/frr:v8.4.0
+    container_name: earth
+    hostname: earth
+    cap_add:
+    - ALL
+    # NET_ADMIN
+    networks:
+      dry100: { ipv4_address: 10.100.4.2 }
+      cold102: { ipv4_address: 10.102.4.2 }
+
+  fire:
+    image: frrouting/frr:v8.4.0
+    container_name: fire
+    hostname: fire
+    cap_add:
+    - ALL
+    # NET_ADMIN
+    networks:
+      dry100: { ipv4_address: 10.100.4.3 }
+      hot103: { ipv4_address: 10.103.4.2 }
+
+  air:
+    image: frrouting/frr:v8.4.0
+    container_name: air
+    hostname: air
+    cap_add:
+    - ALL
+    # NET_ADMIN
+    networks:
+      wet101: { ipv4_address: 10.101.4.3 }
+      hot103: { ipv4_address: 10.103.4.3 }
+
+  water:
+    image: frrouting/frr:v8.4.0
+    container_name: water
+    hostname: water
+    cap_add:
+    - ALL
+    # NET_ADMIN
+    networks:
+      wet101: { ipv4_address: 10.101.4.2 }
+      cold102: { ipv4_address: 10.102.4.3 }
+
 
   box4.0:
     image: busybox
@@ -25,4 +73,19 @@ services:
 networks:
   proxy145:
     name: proxy145
+    external: true
+  dry100:
+    name: dry100
+    external: true
+  wet101:
+    name: wet101
+    external: true
+  cold102:
+    name: cold102
+    external: true
+  hot103:
+    name: hot103
+    external: true
+  overlay12:
+    name: overlay12
     external: true
