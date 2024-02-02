@@ -1,14 +1,14 @@
 version: "3.9"
 services:
-  nginx3.1:
+  testpage-it-3:
     image: nginx:latest
-    container_name: nginx3.1
-    hostname: nginx3.1
+    container_name: testpage-it-3
+    hostname: testpage-it-3
     volumes: [ ./nginx3.1.html:/usr/share/nginx/html/index.html ]
     networks:
-      proxy145: { ipv4_address: 10.145.3.221 }
+      overlay12: { ipv4_address: 10.28.12.221 }
 
 networks:
-  proxy145:
-    name: proxy145
+  overlay12:
+    name: overlay12
     external: true
