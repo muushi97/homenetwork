@@ -1,0 +1,22 @@
+---
+- name: ディレクトリを作成する
+  ansible.builtin.file:
+    path: "/home/pi/texserver/{{ item }}"
+    state: directory
+  loop:
+  - ""
+  - "python"
+- name: ファイルをコピーする
+  ansible.builtin.copy:
+    src: "home/pi/texserver/{{ item }}"
+    dest: "/home/pi/texserver/{{ item }}"
+  loop:
+  - "Dockerfile"
+  - "compose.yaml"
+  - "python/utils.py"
+  - "python/server.py"
+
+
+
+
+

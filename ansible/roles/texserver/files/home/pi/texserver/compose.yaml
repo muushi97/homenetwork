@@ -1,0 +1,28 @@
+version: "3.9"
+
+services:
+  latex-server-2021:
+    build:
+      context: ./
+      target: latex-server
+      args:
+        TEXLIVE_VERSION: 2021
+        #TEXLIVE_VERSION: 2020
+        #TEXLIVE_VERSION: 2019
+    tty: true
+    image: latex-server-2021
+    container_name: latex-server-2021
+    hostname: latex-server-2021
+    volumes:
+        - ./python:/server
+    working_dir: /server
+    command: uvicorn server:app --reload --host 0.0.0.0 --port 80
+    #ports:
+    #    - "8008:80"
+    networks:
+      overlay12: { ipv4_address: 10.28.12.150 }
+
+networks:
+  overlay12:
+    name: overlay12
+    external: true
