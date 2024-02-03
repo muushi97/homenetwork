@@ -1,0 +1,34 @@
+---
+- name: bashrc をコピーする
+  ansible.builtin.copy:
+    src: "home/.bashrc"
+    dest: "{{ home_directory }}/.bashrc"
+    mode: u=rwx,g=r,o=r
+- name: ディレクトリを作成する
+  ansible.builtin.file:
+    path: "{{ home_directory }}/bin"
+    state: directory
+- name: スクリプトをコピーする
+  ansible.builtin.copy:
+    src: "home/bin/{{ item }}"
+    dest: "{{ home_directory }}/bin/{{ item }}"
+    mode: u=rwx,g=r,o=r
+  loop:
+    - "dcenter.sh"
+    - "create-bridge.sh"
+    - "create-overlay.sh"
+    - "pi4-prepare.sh"
+    - "pi3-prepare.sh"
+    - "pi3-add-routes.sh"
+    - "yaml-expandar.sh"
+- name: テンプレートスクリプトをコピーする
+  block:
+    - name: proxy 145.4
+      vars:
+        network_name: "proxy"
+        network_num: "145.4"
+      ansible.builtin.template:
+        src: "home/bin/create-bridge.sh.j2"
+        dest: "{{ home_directory }}/bin/create-bridge-{{ network_num }}.sh"
+        mode: u=rwx,g=r,o=r
+
