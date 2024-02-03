@@ -14,7 +14,13 @@ $TTL 86400
 
 @                   A               10.0.2.2
 kabutomushi-test    A               10.145.4.210
+kabutomushi         A               10.145.4.211
 testpage-en         A               10.145.4.220
 testpage-it         A               10.145.4.221
 nginx3-0            A               10.145.3.220
 nginx3-1            A               10.145.3.221
+redmine             A               10.145.4.170
+texserver-2021      A               10.28.12.150
+testpage-en-3       A               10.28.12.220
+testpage-it-3       A               10.28.12.221
+
