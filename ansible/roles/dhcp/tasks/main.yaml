@@ -1,0 +1,22 @@
+---
+- name: dhcp # DHCP サーバ構築用のタスク
+  tags:
+  - dhcp
+  block:
+  - name: ディレクトリを作成する
+    ansible.builtin.file:
+      path: "/home/pi/dhcp/{{ item }}"
+      state: directory
+    loop:
+      - ""
+      - "config"
+  - name: ファイルをコピーする
+    ansible.builtin.copy:
+      src: "home/pi/dhcp/{{ item }}"
+      dest: "/home/pi/dhcp/{{ item }}"
+    loop:
+      - "compose.yaml"
+      - "config/kea-dhcp4.conf"
+      - "config/kea-ctrl-agent.conf"
+
+
