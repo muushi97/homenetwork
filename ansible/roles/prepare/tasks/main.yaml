@@ -1,0 +1,17 @@
+---
+- name: 必要なパッケージをインストールする
+  ansible.builtin.apt:
+    name: "{{ item }}"
+    state: present
+  loop:
+    - vim
+    - prometheus-node-exporter
+    - qemu-user-static  # Docker でのマルチプラットフォーム対応に必要
+    - util-linux # nsenter が含まれている?
+    - pip
+- name: Python 関係で必要なパッケージをインストールする
+  ansible.builtin.pip:
+    name: "{{ item }}"
+    state: present
+  loop:
+  - pyyaml
