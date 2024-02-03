@@ -1,0 +1,28 @@
+---
+- name: dns # DNS サーバ作成用のタスク
+  vars:
+    directory: home/pi/dns
+  tags:
+  - dns
+  block:
+  - name: ディレクトリを作成する
+    ansible.builtin.file:
+      path: "/{{ directory }}/{{ item }}"
+      state: directory
+    loop:
+      - ""
+      - "config"
+      - "keys"
+      - "zones"
+      - "full-resolver"
+  - name: ファイルをコピーする
+    ansible.builtin.copy:
+      src: "./pi4/{{ directory }}/{{ item }}"
+      dest: "/{{ directory }}/{{ item }}"
+    loop:
+      - "compose.yaml"
+      - "config/nsd.conf"
+      - "config/unbound.conf"
+      - "zones/example.jp.zone"
+      - "zones/maccarello.home.zone"
+      - "full-resolver/Dockerfile"
