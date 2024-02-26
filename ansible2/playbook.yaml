@@ -1,0 +1,19 @@
+---
+# upgrade 等
+- hosts: oak
+  #handlers: { }
+  tasks:
+  - name: upgrade
+    tags:
+    - upgrade
+    become: true
+    block:
+    - name: "更新処理"
+      block:
+      - name: apt update
+        apt:
+          update_cache: yes
+      - name: apt upgrade
+        apt:
+          upgrade: yes
+

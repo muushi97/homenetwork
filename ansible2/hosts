@@ -1,0 +1,7 @@
+[oak]
+192.168.157.100 ansible_user=trustees
+
+[green]
+192.168.157.100 ansible_user=trustees
+
+
