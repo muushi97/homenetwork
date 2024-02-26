@@ -1,0 +1,25 @@
+set interfaces ethernet eth0 address '192.168.157.207/24'
+set interfaces ethernet eth0 hw-id 'bc:24:11:8b:1a:e3'
+set interfaces ethernet eth0 mtu '1450'
+set interfaces ethernet eth1 hw-id 'bc:24:11:49:30:74'
+set interfaces ethernet eth2 hw-id 'bc:24:11:3c:48:47'
+set interfaces ethernet eth3 hw-id 'bc:24:11:8e:cb:3d'
+set interfaces loopback lo
+set service ssh port '22'
+set system config-management commit-revisions '100'
+set system conntrack modules ftp
+set system conntrack modules h323
+set system conntrack modules nfs
+set system conntrack modules pptp
+set system conntrack modules sip
+set system conntrack modules sqlnet
+set system conntrack modules tftp
+set system console device ttyS0 speed '115200'
+set system host-name 'gwr145machamp1'
+set system login user vyos authentication encrypted-password '$6$6jbEKpEXCaN8K$6rRbkxJ9OYLpAIBsG0OaqoKR2WbtHjOVmrhupzKAvgy5iUDQPVSjaEC3ByzGKADAEyJrxOXUjubZia9XQ4W5O/'
+set system login user vyos authentication plaintext-password ''
+set system ntp server time1.vyos.net
+set system ntp server time2.vyos.net
+set system ntp server time3.vyos.net
+set system syslog global facility all level 'info'
+set system syslog global facility protocols level 'debug'

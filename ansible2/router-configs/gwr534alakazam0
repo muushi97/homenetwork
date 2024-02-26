@@ -1,0 +1,35 @@
+set high-availability vrrp group global interface 'eth1'
+set high-availability vrrp group global priority '200'
+set high-availability vrrp group global virtual-address 10.200.0.254/24
+set high-availability vrrp group global vrid '200'
+set interfaces ethernet eth0 address '192.168.157.204/24'
+set interfaces ethernet eth0 hw-id 'bc:24:11:2d:34:92'
+set interfaces ethernet eth0 mtu '1450'
+set interfaces ethernet eth1 address '10.200.0.204/24'
+set interfaces ethernet eth1 hw-id 'bc:24:11:b7:ca:e5'
+set interfaces ethernet eth1 mtu '1450'
+set interfaces loopback lo address '10.255.0.204/24'
+set nat source rule 10 outbound-interface 'eth0'
+set nat source rule 10 translation address 'masquerade'
+set protocols bgp 65534 neighbor 10.200.0.200 remote-as '65000'
+set protocols bgp 65534 neighbor 10.200.0.206 remote-as '65145'
+set protocols bgp 65534 parameters router-id '10.255.0.204'
+set protocols static route 0.0.0.0/0 next-hop 192.168.157.1
+set service ssh port '22'
+set system config-management commit-revisions '100'
+set system conntrack modules ftp
+set system conntrack modules h323
+set system conntrack modules nfs
+set system conntrack modules pptp
+set system conntrack modules sip
+set system conntrack modules sqlnet
+set system conntrack modules tftp
+set system console device ttyS0 speed '115200'
+set system host-name 'gwr534alakazam0'
+set system login user vyos authentication encrypted-password '$6$6jbEKpEXCaN8K$6rRbkxJ9OYLpAIBsG0OaqoKR2WbtHjOVmrhupzKAvgy5iUDQPVSjaEC3ByzGKADAEyJrxOXUjubZia9XQ4W5O/'
+set system login user vyos authentication plaintext-password ''
+set system ntp server time1.vyos.net
+set system ntp server time2.vyos.net
+set system ntp server time3.vyos.net
+set system syslog global facility all level 'info'
+set system syslog global facility protocols level 'debug'

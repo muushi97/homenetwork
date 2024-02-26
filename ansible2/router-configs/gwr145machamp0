@@ -1,0 +1,46 @@
+set high-availability vrrp group vpn0 interface 'eth1'
+set high-availability vrrp group vpn0 priority '200'
+set high-availability vrrp group vpn0 virtual-address 10.0.145.254/24
+set high-availability vrrp group vpn0 vrid '140'
+set high-availability vrrp group vpn1 interface 'eth2'
+set high-availability vrrp group vpn1 priority '200'
+set high-availability vrrp group vpn1 virtual-address 10.1.145.254/24
+set high-availability vrrp group vpn1 vrid '141'
+set interfaces ethernet eth0 address '192.168.157.206/24'
+set interfaces ethernet eth0 hw-id 'bc:24:11:85:8e:e5'
+set interfaces ethernet eth0 mtu '1450'
+set interfaces ethernet eth1 address '10.0.145.252/24'
+set interfaces ethernet eth1 hw-id 'bc:24:11:1f:fe:57'
+set interfaces ethernet eth1 mtu '1450'
+set interfaces ethernet eth2 address '10.1.145.252/24'
+set interfaces ethernet eth2 hw-id 'bc:24:11:22:bd:48'
+set interfaces ethernet eth2 mtu '1450'
+set interfaces ethernet eth3 address '10.200.0.206/24'
+set interfaces ethernet eth3 hw-id 'bc:24:11:b5:39:f8'
+set interfaces ethernet eth3 mtu '1450'
+set interfaces loopback lo address '10.255.0.206/32'
+set protocols bgp 65145 address-family ipv4-unicast network 10.0.145.0/24
+set protocols bgp 65145 address-family ipv4-unicast network 10.1.145.0/24
+set protocols bgp 65145 neighbor 10.200.0.200 address-family ipv4-unicast nexthop-self
+set protocols bgp 65145 neighbor 10.200.0.200 remote-as '65000'
+set protocols bgp 65145 neighbor 10.200.0.204 remote-as '65534'
+set protocols bgp 65145 parameters router-id '10.255.0.201'
+set protocols static route 0.0.0.0/0 next-hop 10.200.0.254
+set service ssh port '22'
+set system config-management commit-revisions '100'
+set system conntrack modules ftp
+set system conntrack modules h323
+set system conntrack modules nfs
+set system conntrack modules pptp
+set system conntrack modules sip
+set system conntrack modules sqlnet
+set system conntrack modules tftp
+set system console device ttyS0 speed '115200'
+set system host-name 'gwr145machamp0'
+set system login user vyos authentication encrypted-password '$6$6jbEKpEXCaN8K$6rRbkxJ9OYLpAIBsG0OaqoKR2WbtHjOVmrhupzKAvgy5iUDQPVSjaEC3ByzGKADAEyJrxOXUjubZia9XQ4W5O/'
+set system login user vyos authentication plaintext-password ''
+set system ntp server time1.vyos.net
+set system ntp server time2.vyos.net
+set system ntp server time3.vyos.net
+set system syslog global facility all level 'info'
+set system syslog global facility protocols level 'debug'
