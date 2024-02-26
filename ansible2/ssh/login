@@ -1,0 +1,5 @@
+#!/bin/sh
+
+export COMMAND=ssh
+export KEY=./secrets/id_ed25519
+/bin/sh $1
