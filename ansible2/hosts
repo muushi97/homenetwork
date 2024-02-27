@@ -1,7 +1,47 @@
-[oak]
-192.168.157.100 ansible_user=trustees
 
-[green]
+[direct:children]
+mgmt000oak0
+vpn145lapras0
+
+[direct:vars]
+ansible_ssh_private_key_file=./secrets/id_ed25519
+ansible_ssh_common_args=-o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null
+
+[onehop:children]
+mgmt000green0
+[onehop:vars]
+ansible_ssh_private_key_file=./secrets/id_ed25519
+ansible_ssh_common_args=-o ProxyCommand="ssh -i ./secrets/id_ed25519 -W %h:%p -q trustees@192.168.157.100 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null" -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null
+ansible_ssh_common_args=-o ProxyCommand="ssh -i ./secrets/id_ed25519 -W %h:%p -q trustees@192.168.157.100 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null" -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null
+
+[twohop:children]
+fdns145hitmonlee0
+dhcp145pidgey0
+[twohop:vars]
+ansible_ssh_private_key_file=./secrets/id_ed25519
+ansible_ssh_common_args=-o ProxyCommand="ssh -i ./secrets/id_ed25519 -W %h:%p -q trustees@10.1.0.1 -o ProxyCommand=\"ssh -i ./secrets/id_ed25519 -W %%h:%%p -q trustees@192.168.157.100 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null\" -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null" -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null
+
+[jumphost:children]
+mgmt000oak0
+mgmt000green0
+
+[mgmt000oak0]
 192.168.157.100 ansible_user=trustees
+[mgmt000oak0:vars]
+hoge=hoge
+
+[mgmt000green0]
+10.1.0.1 ansible_user=trustees
+[mgmt000green0:vars]
+hoge=hoge
+
+[vpn145lapras0]
+192.168.157.195 ansible_user=trustees
+
+[fdns145hitmonlee0]
+10.0.145.251 ansible_user=trustees
+
+[dhcp145pidgey0]
+10.0.145.250 ansible_user=trustees
 
 

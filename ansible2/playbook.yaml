@@ -1,6 +1,6 @@
 ---
 # upgrade 等
-- hosts: oak
+- hosts: mgmt000oak0
   #handlers: { }
   tasks:
   - name: upgrade
@@ -16,4 +16,32 @@
       - name: apt upgrade
         apt:
           upgrade: yes
+
+- hosts: mgmt000green0
+  tasks:
+  - name: Ping Connection
+    tags:
+    - test
+    ansible.builtin.ping:
+
+- hosts: vpn145lapras0
+  tasks:
+  - name: Ping Connection
+    tags:
+    - test
+    ansible.builtin.ping:
+
+- hosts: fdns145hitmonlee0
+  tasks:
+  - name: Ping Connection
+    tags:
+    - test
+    ansible.builtin.ping:
+
+- hosts: dhcp145pidgey0
+  tasks:
+  - name: Ping Connection
+    tags:
+    - test
+    ansible.builtin.ping:
 
