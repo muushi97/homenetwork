@@ -1,5 +1,8 @@
 #!/bin/sh
 
+KEY_NAME="id_ed25519"
+SECRETS_DIR=$(cd $(dirname $0); cd ../secrets; pwd)
+
 export COMMAND=ssh
-export KEY=./secrets/id_ed25519
+export KEY=${SECRETS_DIR}/${KEY_NAME}
 /bin/sh $1
