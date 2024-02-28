@@ -1,0 +1,9 @@
+---
+- name: resolve.conf の配布
+  hosts: all
+  gather_facts: no
+
+  tasks:
+    - name: distribute
+      ansible.builtin.import_role:
+        name: resolve

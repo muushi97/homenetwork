@@ -1,0 +1,6 @@
+---
+- name: コントロールノードから管理対象ノードへテンプレートファイルをコピーする
+  ansible.builtin.template:
+    src: ./etc/resolv.conf.j2
+    dest: /etc/resolv.conf
+  become: yes
