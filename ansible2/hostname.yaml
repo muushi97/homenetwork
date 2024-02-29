@@ -1,0 +1,9 @@
+---
+- name: ホスト名の設定
+  hosts: cdns000mankey0
+  gather_facts: no
+
+  tasks:
+    - name: set hostname
+      ansible.builtin.import_role:
+        name: hostname

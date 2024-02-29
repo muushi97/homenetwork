@@ -1,0 +1,14 @@
+---
+- block:
+  - name: /etc/hostname を配付する
+    ansible.builtin.template:
+      src: ./etc/hostname.j2
+      dest: /etc/hostname
+  - name: /etc/hostname を配付する
+    ansible.builtin.template:
+      src: ./etc/hosts.j2
+      dest: /etc/hosts
+  - name: ホスト名を設定する
+    ansible.builtin.hostname:
+      name: "{{ inventory_hostname }}"
+  become: yes

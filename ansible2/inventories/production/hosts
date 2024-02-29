@@ -5,6 +5,7 @@ vpn145lapras0
 
 [onehop:children]
 mgmt000green0
+cdns000mankey0
 
 [twohop:children]
 fdns145hitmonlee0
@@ -13,6 +14,7 @@ dhcp145pidgey0
 [as65000]
 mgmt000oak0
 mgmt000green0
+cdns000mankey0
 
 [as65145]
 fdns145hitmonlee0
@@ -35,6 +37,9 @@ vpn145lapras0 ansible_host=192.168.157.195 ansible_user=trustees
 
 [fdns145hitmonlee0]
 fdns145hitmonlee0 ansible_host=10.0.145.251 ansible_user=trustees
+
+[cdns000mankey0]
+cdns000mankey0 ansible_host=10.0.0.249 ansible_user=trustees
 
 [dhcp145pidgey0]
 dhcp145pidgey0 ansible_host=10.0.145.250 ansible_user=trustees
