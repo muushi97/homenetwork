@@ -1,0 +1,67 @@
+---
+# upgrade 等
+- hosts: jumphost
+  #handlers: { }
+  tasks:
+  - name: upgrade
+    tags:
+    - upgrade
+    become: true
+    block:
+    - name: "更新処理"
+      block:
+      - name: apt update
+        apt:
+          update_cache: yes
+      - name: apt upgrade
+        apt:
+          upgrade: yes
+
+- hosts: direct
+  tasks:
+  - name: upgrade
+    tags:
+    - upgrade
+    become: true
+    block:
+    - name: "更新処理"
+      block:
+      - name: apt update
+        apt:
+          update_cache: yes
+      - name: apt upgrade
+        apt:
+          upgrade: yes
+
+- hosts: onehop
+  tasks:
+  - name: upgrade
+    tags:
+    - upgrade
+    become: true
+    block:
+    - name: "更新処理"
+      block:
+      - name: apt update
+        apt:
+          update_cache: yes
+      - name: apt upgrade
+        apt:
+          upgrade: yes
+
+- hosts: twohop
+  tasks:
+  - name: upgrade
+    tags:
+    - upgrade
+    become: true
+    block:
+    - name: "更新処理"
+      block:
+      - name: apt update
+        apt:
+          update_cache: yes
+      - name: apt upgrade
+        apt:
+          upgrade: yes
+

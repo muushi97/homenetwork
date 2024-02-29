@@ -1,0 +1,3 @@
+- import_playbook: resolve.yaml
+- import_playbook: hostname.yaml
+- import_playbook: update.yaml
