@@ -1,6 +1,6 @@
 ---
 - name: ホスト名の設定
-  hosts: cdns000mankey0
+  hosts: all
   gather_facts: no
 
   tasks:

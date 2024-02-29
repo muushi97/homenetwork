@@ -1,5 +1,5 @@
 ---
-- block:
+- block: # 順番は sudo にかかる時間が少なくなるように設定
   - name: /etc/hostname を配付する
     ansible.builtin.template:
       src: ./etc/hostname.j2
