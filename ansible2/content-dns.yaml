@@ -1,0 +1,9 @@
+---
+- name: nsd のインストール
+  hosts: cdns000mankey0
+  gather_facts: no
+
+  tasks:
+    - name: distribute
+      ansible.builtin.import_role:
+        name: content-dns

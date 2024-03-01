@@ -1,0 +1,9 @@
+---
+- name: unbound のインストール
+  hosts: fdns000hitmonlee0,fdns000hitmonchan0,fdns145hitmonlee0,fdns145hitmonchan0
+  gather_facts: no
+
+  tasks:
+    - name: distribute
+      ansible.builtin.import_role:
+        name: cache-dns
