@@ -48,5 +48,5 @@ ansible-playbook -i "${INVENTORY}" "${PLAYBOOK}" -u "${REMOTE_USER}" -t "${TAG1}
 - [Ansible.Builtin — Ansible Documentation](https://docs.ansible.com/ansible/latest/collections/ansible/builtin/index.html)
 - [Community.Docker — Ansible Documentation](https://docs.ansible.com/ansible/latest/collections/community/docker/index.html)
 - [Ansible の使い方](https://zenn.dev/y_mrok/books/ansible-no-tsukaikata)
-
-
+- [いまさら Ansible Vault で変数とファイルを暗号化して、Vault パスワードをスクリプトで管理する #Ansible - Qiita](https://qiita.com/3244/items/52911e4c8448ad433eb5)
+- [Ansibleのベストプラクティスなディレクトリ構成を試す - tk\_ch’s blog](https://tk-ch.hatenablog.com/entry/20230304/1677858567)

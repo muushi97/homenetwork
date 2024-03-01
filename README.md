@@ -3,6 +3,7 @@
 - [Namespace](./docs/namespace.md)
     - `ip tap` コマンド
 - [Ansible](./docs/ansible.md)
+- [Unbound](./docs/unbound.md)
 - [SSH](./docs/ssh.md)
 - [Docker](./docs/docker.md)
 - [Kea](./docs/kea.md)
