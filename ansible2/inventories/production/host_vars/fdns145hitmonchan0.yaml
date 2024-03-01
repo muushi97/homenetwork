@@ -8,4 +8,4 @@ forward_zones:
   forward_addr: 10.1.0.251
 
 allow_addresses:
-- 10.0.145.0/24
+- 10.1.145.0/24
