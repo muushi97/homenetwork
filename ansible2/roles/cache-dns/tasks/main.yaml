@@ -1,0 +1,18 @@
+---
+- name: unbound をインストールする
+  ansible.builtin.apt:
+    name: unbound
+    state: present
+  become: yes
+- name: /etc/unbound/unbound.conf を配付する
+  ansible.builtin.template:
+    src: ./etc/unbound/unbound.conf.j2
+    dest: /etc/unbound/unbound.conf
+  become: yes
+
+- name: unbound を起動する
+  ansible.builtin.systemd:
+    name: unbound.service
+    state: restarted
+  become: yes
+

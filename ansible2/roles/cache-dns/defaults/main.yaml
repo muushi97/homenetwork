@@ -1,0 +1,15 @@
+---
+stub_zones:
+- name: "maccarello.home."
+  stub_addr: 10.0.0.249
+- name: "0.0.10.in-addr.arpa."
+  stub_addr: 10.0.0.249
+
+forward_zones:
+- name: "maccarello.home."
+  forward_addr: 10.0.0.251
+- name: "0.0.10.in-addr.arpa."
+  forward_addr: 10.0.0.251
+
+allow_addresses:
+- 10.0.0.0/24

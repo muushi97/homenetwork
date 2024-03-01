@@ -1,0 +1,30 @@
+server:
+        interface: ::0      #IPv6
+        interface: 0.0.0.0  #IPv4
+
+        access-control: 0.0.0.0/0 refuse
+        access-control: ::0/0 refuse
+        access-control: 127.0.0.0/8 allow
+        access-control: ::1/128 allow
+{% for allow_addr in allow_addresses %}
+        access-control: {{ allow_addr }} allow
+{% endfor %}
+
+        local-zone: "0.0.10.in-addr.arpa." transparent
+
+{% for stub_zone in stub_zones %}
+stub-zone:
+        name: "{{ stub_zone.name }}"
+        stub-addr: {{ stub_zone.stub_addr }}
+{% endfor %}
+
+{% for forward_zone in forward_zones %}
+forward-zone:
+        name: "{{ forward_zone.name }}"
+        forward-addr: {{ forward_zone.forward_addr }}
+{% endfor %}
+
+forward-zone:
+        name: "."
+        forward-addr: 8.8.8.8                   # IPv4 Google public DNS#1
+        forward-addr: 8.8.4.4                   # IPv4 Google public DNS#2
