@@ -1,0 +1,12 @@
+---
+- name: unbound_enable
+  ansible.builtin.systemd:
+    name: unbound.service
+    enabled: yes
+  become: yes
+
+- name: unbound_restart
+  ansible.builtin.systemd:
+    name: unbound.service
+    state: restarted
+  become: yes

@@ -4,20 +4,17 @@
     name: nsd
     state: present
   become: yes
+  notify: nsd_enable
+
 - name: /etc/nsd/nsd.conf を配付する
   ansible.builtin.template:
     src: ./etc/nsd/nsd.conf.j2
     dest: /etc/nsd/nsd.conf
   become: yes
+  notify: nsd_restart
 - name: /etc/nsd/maccarello.home.zone を配付する
   ansible.builtin.template:
     src: ./etc/nsd/maccarello.home.zone.j2
     dest: /etc/nsd/maccarello.home.zone
   become: yes
-
-- name: nsd を起動する
-  ansible.builtin.systemd:
-    name: nsd.service
-    state: restarted
-  become: yes
-
+  notify: nsd_restart
