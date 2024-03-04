@@ -1,0 +1,12 @@
+---
+- name: kea_enable
+  ansible.builtin.systemd:
+    name: isc-kea-dhcp4-server.service
+    enabled: yes
+  become: yes
+
+- name: kea_restart
+  ansible.builtin.systemd:
+    name: isc-kea-dhcp4-server.service
+    state: restarted
+  become: yes

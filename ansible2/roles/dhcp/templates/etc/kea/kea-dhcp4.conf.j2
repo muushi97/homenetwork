@@ -1,0 +1,88 @@
+{
+  "Dhcp4": {
+    "renew-timer": 1000,
+    "rebind-timer": 2000,
+    "valid-lifetime": 4000,
+
+    "interfaces-config": {
+      "interfaces": [ "ens18" ],
+      "service-sockets-max-retries": 5,
+      "service-sockets-require-all": true
+    },
+
+    "lease-database": {
+        "type": "memfile",
+        "persist": true,
+        "name": "/tmp/kea-leases4.csv",
+        "lfc-interval": 1800,
+        "max-row-errors": 100
+    },
+
+    "subnet4": [
+      {
+        "id": 1,
+        "subnet": "10.0.145.0/24",
+        "pools": [ { "pool": "10.0.145.101-10.0.145.199" } ],
+        "interface": "ens18",
+        "reservations-global": false,
+        "reservations-in-subnet": true,
+        "reservations-out-of-pool": false,
+        "reservations": [
+          {
+            "hw-address": "5e:59:75:26:03:6b",
+            "ip-address": "10.0.145.34"
+          }
+        ]
+      }
+    ],
+
+    #"option-def": [
+    #  {
+    #    "name": "classless-static-routes",
+    #    "code": 121,
+    #    "space": "dhcp4",
+    #    "type": "record",
+    #    "array": true,
+    #    "record-types": "uint8,uint8,uint8,uint8,uint8,uint8,uint8,uint8,uint8,uint8,uint8,uint8,uint8,uint8,uint8,uint8"
+    #  }
+    #],
+
+    "option-data": [
+      {
+        "name": "domain-name-servers",
+        "data": "10.0.145.251"
+      },
+      {
+        "code": 121,
+        "name": "classless-static-route",
+        "data": "10.1.145.0/24 - 10.0.145.254, 10.28.12.0/24 - 10.0.145.254, 10.1.0.0/24 - 10.0.145.254, 10.0.0.0/24 - 10.0.145.254"
+        # 10.1.145.0/24 へを 10.0.145.254 を経由するように広報する
+        # 10.28.12.0/24 へを 10.0.145.254 を経由するように広報する
+        # https://github.com/isc-projects/kea/blob/master/doc/examples/kea4/all-options.json
+      }
+      #{
+      #  "name": "classless-static-routes",
+      #  "data": "24,10,1,145,10,0,145,254,24,10,28,12,10,0,145,254"
+      #  # 10.1.145.0/24 へを 10.0.145.254 を経由するように広報する
+      #  # 10.28.12.0/24 へを 10.0.145.254 を経由するように広報する
+      #}
+    ],
+    "hooks-libraries": [],
+    "shared-networks": [],
+    "control-socket": {
+      "socket-type": "unix",
+      "socket-name": "/tmp/kea-dhcp4-ctrl.sock"
+    },
+    "loggers": [
+      {
+        "name": "kea-dhcp4",
+        "output_options": [
+          {
+              "output": "stdout"
+          }
+        ],
+        "severity": "INFO"
+      }
+    ]
+  }
+}

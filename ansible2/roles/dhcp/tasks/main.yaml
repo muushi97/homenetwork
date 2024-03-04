@@ -1,0 +1,26 @@
+---
+- name: リポジトリの設定
+  block:
+  - name: リポジトリの設定
+    ansible.builtin.shell:
+      cmd: curl -1sLf 'https://dl.cloudsmith.io/public/isc/kea-2-5/setup.deb.sh' | sudo -E bash
+  - name: apt update
+    apt:
+      update_cache: yes
+  become: true
+
+- name: kea のインストール
+  ansible.builtin.apt:
+    name: isc-kea-dhcp4-server
+    state: present
+  become: yes
+  notify: kea_enable
+
+- name: /etc/kea/kea-dhcp4.conf を配付する
+  ansible.builtin.template:
+    src: ./etc/kea/kea-dhcp4.conf.j2
+    dest: /etc/kea/kea-dhcp4.conf
+  become: yes
+  notify: kea_restart
+
+

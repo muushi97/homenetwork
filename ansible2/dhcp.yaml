@@ -1,0 +1,9 @@
+---
+- name: dhcp
+  hosts: dhcp145pidgey0
+  gather_facts: no
+
+  tasks:
+    - name: distribute
+      ansible.builtin.import_role:
+        name: dhcp
