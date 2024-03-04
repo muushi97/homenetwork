@@ -1,6 +1,11 @@
 
 
-all: secrets/id_ed25519 ./bin/dhall-to-yaml-ng
+ROLEDIR := roles
+
+DHALLS := $(shell find $(ROLEDIR)/ -type f -name '*.dhall' | grep -E '/files/|/templates/')
+YMLS := $(patsubst %.dhall,%.yml,$(DHALLS))
+
+all: secrets/id_ed25519 ./bin/dhall-to-yaml-ng $(YMLS)
 
 
 secrets/id_ed25519:
@@ -8,6 +13,8 @@ secrets/id_ed25519:
 	chmod 700 secrets
 	ssh-keygen -t ed25519 -N "" -f ./secrets/id_ed25519
 
+%.yml: %.dhall ./bin/dhall-to-yaml-ng
+	./bin/dhall-to-yaml-ng --file $< --output $@
 
 # [Getting started: Generate JSON or YAML — Dhall documentation](https://docs.dhall-lang.org/tutorials/Getting-started_Generate-JSON-or-YAML.html#linux)
 ./bin/dhall-to-yaml-ng: ./.tmp/dhall-yaml.tar.bz2
