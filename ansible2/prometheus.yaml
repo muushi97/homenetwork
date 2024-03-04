@@ -1,0 +1,9 @@
+---
+- name: Prometheus
+  hosts: mntr000lickitung0
+  gather_facts: no
+
+  tasks:
+    - name: distribute
+      ansible.builtin.import_role:
+        name: prometheus

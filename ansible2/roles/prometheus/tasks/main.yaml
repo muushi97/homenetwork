@@ -1,0 +1,99 @@
+---
+- name: prometheus をインストールする
+  block:
+  #- name: download prometheus
+  #  get_url:
+  #    url: "https://github.com/prometheus/prometheus/releases/download/v2.45.3/prometheus-2.45.3.linux-amd64.tar.gz"
+  #    dest: /tmp
+  - name: ダウンロードしている prometheus の binary を配付，展開する
+    ansible.builtin.unarchive:
+      src: ./opt/prometheus-2.45.3.linux-amd64.tar.gz # https://github.com/prometheus/prometheus/releases/download/v2.45.3/prometheus-2.45.3.linux-amd64.tar.gz
+      dest: /opt
+  - name: Create a symbolic link
+    ansible.builtin.file:
+      src: /opt/prometheus-2.45.3.linux-amd64/prometheus
+      dest: /usr/local/bin/prometheus
+      state: link
+  - name: Create a symbolic link
+    ansible.builtin.file:
+      src: /opt/prometheus-2.45.3.linux-amd64/promtool
+      dest: /usr/local/bin/promtool
+      state: link
+  - name: service ファイルの配付
+    ansible.builtin.copy:
+      src: ./etc/systemd/system/prometheus.service
+      dest: /etc/systemd/system/prometheus.service
+  - name: リロード
+    ansible.builtin.systemd:
+      daemon_reload: true
+  become: yes
+  notify: prometheus_enable
+
+- name: node exporter をインストールする
+  ansible.builtin.apt:
+    name: prometheus
+    state: present
+  become: yes
+  notify: node_exporter_enable
+
+- name: /etc/prometheus/prometheus.yml を配付する
+  #ansible.builtin.template:
+  #  src: ./etc/prometheus/prometheus.yml.j2
+  ansible.builtin.copy:
+    src: ./etc/prometheus/prometheus.yml
+    dest: /etc/prometheus/prometheus.yml
+  become: yes
+  notify: prometheus_restart
+
+- name: /etc/prometheus/targets.d を配付する
+  block:
+  - name: ディレクトリ作成
+    ansible.builtin.file:
+      path: /etc/prometheus/targets.d
+      state: directory
+  - name: ファイルの配付
+    #ansible.builtin.template:
+    #  src: ./etc/prometheus/targets.d/{{ item }}.j2
+    ansible.builtin.copy:
+      src: ./etc/prometheus/targets.d/{{ item }}
+      dest: /etc/prometheus/targets.d/{{ item }}
+    loop:
+    - proxmox.yml
+    - raspberry.yml
+    notify: prometheus_restart
+  become: yes
+
+- name: /etc/prometheus/scrapes.d を配付する
+  block:
+  - name: ディレクトリ作成
+    ansible.builtin.file:
+      path: /etc/prometheus/scrapes.d
+      state: directory
+  - name: ファイルの配付
+    #ansible.builtin.template:
+    #  src: ./etc/prometheus/scrapes.d/{{ item }}.j2
+    ansible.builtin.copy:
+      src: ./etc/prometheus/scrapes.d/{{ item }}
+      dest: /etc/prometheus/scrapes.d/{{ item }}
+    loop:
+    - proxmox.yml
+    - raspberry.yml
+    notify: prometheus_restart
+  become: yes
+
+- name: /etc/prometheus/rules.d を配付する
+  block:
+  - name: ディレクトリ作成
+    ansible.builtin.file:
+      path: /etc/prometheus/rules.d
+      state: directory
+  - name: ファイルの配付
+    ansible.builtin.copy:
+      src: ./etc/prometheus/rules.d/{{ item }}
+      dest: /etc/prometheus/rules.d/{{ item }}
+    loop:
+    - alert-rules.yml
+    notify: prometheus_restart
+  become: yes
+  
+

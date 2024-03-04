@@ -5,7 +5,11 @@ ROLEDIR := roles
 DHALLS := $(shell find $(ROLEDIR)/ -type f -name '*.dhall' | grep -E '/files/|/templates/')
 YMLS := $(patsubst %.dhall,%.yml,$(DHALLS))
 
-all: secrets/id_ed25519 ./bin/dhall-to-yaml-ng $(YMLS)
+all: secrets/id_ed25519 ./bin/dhall-to-yaml-ng $(YMLS) roles/prometheus/files/opt/prometheus-2.45.3.linux-amd64.tar.gz
+
+# [Download | Prometheus](https://prometheus.io/download/)
+roles/prometheus/files/opt/prometheus-2.45.3.linux-amd64.tar.gz:
+	curl -L https://github.com/prometheus/prometheus/releases/download/v2.45.3/prometheus-2.45.3.linux-amd64.tar.gz -o $@
 
 
 secrets/id_ed25519:

@@ -1,0 +1,24 @@
+---
+- name: prometheus_enable
+  ansible.builtin.systemd:
+    name: prometheus.service
+    enabled: yes
+  become: yes
+
+- name: prometheus_restart
+  ansible.builtin.systemd:
+    name: prometheus.service
+    state: restarted
+  become: yes
+
+- name: node_exporter_enable
+  ansible.builtin.systemd:
+    name: prometheus-node-exporter.service
+    enabled: yes
+  become: yes
+
+- name: node_exporter_restart
+  ansible.builtin.systemd:
+    name: prometheus-node-exporter.service
+    state: restarted
+  become: yes
