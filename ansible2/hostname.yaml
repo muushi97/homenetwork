@@ -1,9 +1,0 @@
----
-- name: ホスト名の設定
-  hosts: all
-  gather_facts: no
-
-  tasks:
-    - name: set hostname
-      ansible.builtin.import_role:
-        name: hostname

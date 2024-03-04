@@ -1,4 +1,22 @@
 ---
+- name: ホスト名の設定
+  hosts: all
+  gather_facts: no
+
+  tasks:
+    - name: set hostname
+      ansible.builtin.import_role:
+        name: hostname
+
+- name: resolve.conf の配布
+  hosts: all
+  gather_facts: no
+
+  tasks:
+    - name: distribute
+      ansible.builtin.import_role:
+        name: resolve
+
 # upgrade 等
 - hosts: jumphost
   #handlers: { }
@@ -64,4 +82,5 @@
       - name: apt upgrade
         apt:
           upgrade: yes
+
 
