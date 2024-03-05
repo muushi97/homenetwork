@@ -1,28 +1,31 @@
 $ORIGIN maccarello.home.
 $TTL 86400
 
-@ IN SOA ns1.maccarello.home. hostmaster.maccarello.home. (
-                    2021033101      ; serial
-                    28800           ; refresh
-                    7200            ; retry
-                    86400           ; expire
-                    86400           ; min TTL
-                    )
+@                   IN  SOA     mankey.maccarello.home. hostmaster.maccarello.home. (
+                                    2021033101      ; serial
+                                    28800           ; refresh
+                                    7200            ; retry
+                                    86400           ; expire
+                                    86400           ; min TTL
+                                    )
 
-                    NS              ns1.maccarello.home.
-                    NS              ns2.maccarello.home.
+                        NS      mankey.maccarello.home.
 
-@                   A               10.0.2.2
-kabutomushi-test    A               10.145.4.210
-kabutomushi         A               10.145.4.211
-testpage-en         A               10.145.4.220
-testpage-it         A               10.145.4.221
-drawthe-net         A               10.145.4.160
-nginx3-0            A               10.145.3.220
-nginx3-1            A               10.145.3.221
-redmine             A               10.145.4.170
-texserver-2021      A               10.28.12.150
-testpage-en-3       A               10.28.12.220
-testpage-it-3       A               10.28.12.221
-test                A               10.0.0.1
+@                       A       10.0.0.1
+
+mankey                  A       10.0.0.249
+
+
+kabutomushi-test        A       10.145.4.210
+kabutomushi             A       10.145.4.211
+testpage-en             A       10.145.4.220
+testpage-it             A       10.145.4.221
+drawthe-net             A       10.145.4.160
+nginx3-0                A       10.145.3.220
+nginx3-1                A       10.145.3.221
+redmine                 A       10.145.4.170
+texserver-2021          A       10.28.12.150
+testpage-en-3           A       10.28.12.220
+testpage-it-3           A       10.28.12.221
+test                    A       10.0.0.1
 

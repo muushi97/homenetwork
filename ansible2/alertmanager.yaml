@@ -1,5 +1,5 @@
 ---
-- name: Grafana
+- name: Alertmanager
   hosts: mntr000growlithe0
   gather_facts: no
 
