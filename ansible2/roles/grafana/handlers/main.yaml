@@ -1,0 +1,12 @@
+---
+- name: grafana_enable
+  ansible.builtin.systemd:
+    name: grafana-server.service
+    enabled: yes
+  become: yes
+
+- name: grafana_restart
+  ansible.builtin.systemd:
+    name: grafana-server.service
+    state: restarted
+  become: yes

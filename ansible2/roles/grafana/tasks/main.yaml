@@ -1,0 +1,44 @@
+---
+- name: grafana をインストールする
+  # [Install Grafana on Debian or Ubuntu | Grafana documentation](https://grafana.com/docs/grafana/latest/setup-grafana/installation/debian/)
+  block:
+  - name: 必要なパッケージはインストール
+    # sudo apt-get install -y apt-transport-https software-properties-common wget
+    ansible.builtin.apt:
+      name: "{{ item }}"
+      state: present
+    loop:
+    - apt-transport-https
+    - software-properties-common
+    - wget
+  - name: key を置くディレクトリ作成
+    ansible.builtin.file:
+      path: /etc/apt/keyrings
+      state: directory
+  - name: key の配置
+    ansible.builtin.shell: wget -q -O - https://apt.grafana.com/gpg.key | gpg --dearmor | sudo tee /etc/apt/keyrings/grafana.gpg > /dev/null
+  - name: リポジトリの追加
+    ansible.builtin.shell: echo "deb [signed-by=/etc/apt/keyrings/grafana.gpg] https://apt.grafana.com stable main" | sudo tee -a /etc/apt/sources.list.d/grafana.list
+  - name: リポジトリの更新
+    apt:
+      update_cache: yes
+  - name: grafana のインストール
+    ansible.builtin.apt:
+      name: grafana
+      state: present
+  become: yes
+  notify: grafana_enable
+
+
+
+  #- name: ダウンロードしている prometheus の binary を配付，展開する
+  #  ansible.builtin.unarchive:
+  #    src: ./opt/prometheus-2.45.3.linux-amd64.tar.gz # https://github.com/prometheus/prometheus/releases/download/v2.45.3/prometheus-2.45.3.linux-amd64.tar.gz
+  #    dest: /opt
+
+
+
+
+
+
+
