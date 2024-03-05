@@ -1,0 +1,4 @@
+---
+webhook_url:
+- "{{ vault_webhook_url[0] }}"
+- "{{ vault_webhook_url[0] }}"

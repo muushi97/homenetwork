@@ -1,0 +1,28 @@
+let title = "{% raw %}{{ .Status | toUpper }}{% endraw %}"
+let message =
+''
+{% raw %}{{- range .Alerts }}
+- **{{ .Status | toUpper }} {{ .Labels.alertname }}**: {{ .Annotations.summary }}
+{{- end }}{% endraw %}
+
+'' -- raw と endraw の関係で endraw の後に改行を入れないとうまく yaml に展開されない
+let config1 =
+      { send_resolved = True
+      -- , webhook_url = ./webhook-url.txt as Text
+      , webhook_url = "{{ webhook_url[0] }}"
+      , title = title
+      , message = message
+      }
+let config2 =
+      { send_resolved = True
+      , webhook_url = "{{ webhook_url[1] }}"
+      , title = title
+      , message = message
+      }
+in  { global =
+      { resolve_timeout = "5m" }
+    , route =
+      { receiver = "納豆鍋" }
+    , receivers =
+      [ { name = "納豆鍋", discord_configs = [ config1, config2 ] } ]
+    }

@@ -2,8 +2,14 @@
 
 ROLEDIR := roles
 
-DHALLS := $(shell find $(ROLEDIR)/ -type f -name '*.dhall' | grep -E '/files/|/templates/')
-YMLS := $(patsubst %.dhall,%.yml,$(DHALLS))
+
+FILES_DHALLS := $(shell find $(ROLEDIR)/ -type f -name '*.dhall' | grep -E '/files/')
+FILES_YMLS := $(patsubst %.dhall,%.yml,$(FILES_DHALLS))
+
+TEMPLATES_DHALLS := $(shell find $(ROLEDIR)/ -type f -name '*.dhall.j2' | grep -E '/templates/')
+TEMPLATES_YMLS := $(patsubst %.dhall.j2,%.yml.j2,$(TEMPLATES_DHALLS))
+
+YMLS := $(FILES_YMLS) $(TEMPLATES_YMLS)
 
 all: secrets/id_ed25519 ./bin/dhall-to-yaml-ng $(YMLS) roles/prometheus/files/opt/prometheus-2.45.3.linux-amd64.tar.gz
 
@@ -18,6 +24,9 @@ secrets/id_ed25519:
 	ssh-keygen -t ed25519 -N "" -f ./secrets/id_ed25519
 
 %.yml: %.dhall ./bin/dhall-to-yaml-ng
+	./bin/dhall-to-yaml-ng --file $< --output $@
+
+%.yml.j2: %.dhall.j2 ./bin/dhall-to-yaml-ng
 	./bin/dhall-to-yaml-ng --file $< --output $@
 
 # [Getting started: Generate JSON or YAML — Dhall documentation](https://docs.dhall-lang.org/tutorials/Getting-started_Generate-JSON-or-YAML.html#linux)

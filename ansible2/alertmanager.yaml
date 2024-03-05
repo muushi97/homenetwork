@@ -1,0 +1,9 @@
+---
+- name: Grafana
+  hosts: mntr000growlithe0
+  gather_facts: no
+
+  tasks:
+    - name: distribute
+      ansible.builtin.import_role:
+        name: alertmanager

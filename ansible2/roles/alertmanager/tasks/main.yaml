@@ -1,0 +1,17 @@
+---
+- name: alertmanager をインストールする
+  ansible.builtin.apt:
+    name: prometheus-alertmanager
+    state: present
+  become: yes
+  notify: alertmanager_enable
+
+- name: /etc/prometheus/alertmanager.yml を配付する
+  #ansible.builtin.copy:
+  #  src: ./etc/prometheus/alertmanager.yml
+  ansible.builtin.template:
+    src: ./etc/prometheus/alertmanager.yml.j2
+    dest: /etc/prometheus/alertmanager.yml
+  become: yes
+  notify: alertmanager_restart
+
