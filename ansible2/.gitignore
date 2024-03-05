@@ -6,3 +6,5 @@ roles/**/files/**/*.yml
 roles/**/templates/**/*.yml.j2
 
 inventories/**/vault.yaml
+
+**/*.tar.gz
