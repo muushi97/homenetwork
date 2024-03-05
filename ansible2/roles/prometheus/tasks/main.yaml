@@ -31,7 +31,7 @@
 
 - name: node exporter をインストールする
   ansible.builtin.apt:
-    name: prometheus
+    name: prometheus-node-exporter
     state: present
   become: yes
   notify: node_exporter_enable
