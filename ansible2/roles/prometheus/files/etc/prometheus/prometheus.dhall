@@ -9,6 +9,10 @@ let config =
 in  { global = config
     , rule_files = [ "./rules.d/*.yml" ]
     , scrape_config_files = [ "./scrapes.d/*.yml" ]
+    , alerting =
+      { alertmanagers =
+        [ { static_configs = [ { targets = [ "10.0.0.102:9093" ] } ] } ]
+      }
     }
 
 
