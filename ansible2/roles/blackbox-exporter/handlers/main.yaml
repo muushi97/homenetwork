@@ -1,0 +1,12 @@
+---
+- name: blackbox_exporter_enable
+  ansible.builtin.systemd:
+    name: prometheus-blackbox-exporter.service
+    enabled: yes
+  become: yes
+
+- name: blackbox_exporter_restart
+  ansible.builtin.systemd:
+    name: prometheus-blackbox-exporter.service
+    state: restarted
+  become: yes

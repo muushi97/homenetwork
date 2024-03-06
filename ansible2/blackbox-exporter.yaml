@@ -1,0 +1,9 @@
+---
+- name: Blackbox Exporter
+  hosts: mntr000zubat0
+  gather_facts: no
+
+  tasks:
+    - name: distribute
+      ansible.builtin.import_role:
+        name: blackbox-exporter
