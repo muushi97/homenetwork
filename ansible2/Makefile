@@ -11,7 +11,11 @@ TEMPLATES_YMLS := $(patsubst %.dhall.j2,%.yml.j2,$(TEMPLATES_DHALLS))
 
 YMLS := $(FILES_YMLS) $(TEMPLATES_YMLS)
 
+
 all: secrets/id_ed25519 ./bin/dhall-to-yaml-ng $(YMLS) roles/prometheus/files/opt/prometheus-2.45.3.linux-amd64.tar.gz
+
+galaxy:
+	ansible-galaxy collection install community.docker
 
 # [Download | Prometheus](https://prometheus.io/download/)
 roles/prometheus/files/opt/prometheus-2.45.3.linux-amd64.tar.gz:

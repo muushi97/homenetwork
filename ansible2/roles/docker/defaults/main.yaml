@@ -1,0 +1,4 @@
+---
+ARCHITECTURE: "amd64"
+VERSION_CODENAME: "bookworm"
+venv_path: "/.venv/ansible"

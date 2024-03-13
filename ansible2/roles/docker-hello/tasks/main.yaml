@@ -1,0 +1,11 @@
+---
+- name: Hello 
+  vars:
+    ansible_python_interpreter: "{{ venv_path }}/bin/python"
+  block:
+  - name: Pull an image
+    community.docker.docker_image_pull:
+      name: hello-world
+
+
+

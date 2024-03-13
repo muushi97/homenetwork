@@ -1,0 +1,1 @@
+$COMMAND -i $KEY trustees@10.0.0.150 -o ProxyCommand="ssh -i $(echo $KEY | sed 's/\.pub$//') -W %h:%p -q trustees@192.168.157.100 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null" -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null

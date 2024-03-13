@@ -1,0 +1,12 @@
+---
+- name: docker
+  hosts: svr000kangaskhan0
+  gather_facts: no
+
+  tasks:
+    - name: docker
+      ansible.builtin.import_role:
+        name: docker
+    - name: docker hello
+      ansible.builtin.import_role:
+        name: docker-hello

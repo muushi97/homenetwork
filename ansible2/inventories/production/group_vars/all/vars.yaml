@@ -1,2 +1,3 @@
 ---
 ansible_become_password: "{{ vault_ansible_become_password }}"
+venv_path: "/home/trustees/.venv/ansible"

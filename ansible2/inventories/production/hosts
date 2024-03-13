@@ -12,6 +12,7 @@ mntr000lickitung0
 mntr000venonat0
 mntr000growlithe0
 mntr000zubat0
+svr000kangaskhan0
 
 [twohop:children]
 fdns145hitmonlee0
@@ -39,6 +40,7 @@ fdns000hitmonlee0
 mntr000lickitung0
 mntr000venonat0
 mntr000growlithe0
+svr000kangaskhan0
 
 [network-proxy:children]
 mgmt000green0
@@ -100,3 +102,6 @@ mntr000growlithe0 ansible_host=10.0.0.102 ansible_user=trustees
 
 [mntr000zubat0]
 mntr000zubat0 ansible_host=10.1.0.103 ansible_user=trustees
+
+[svr000kangaskhan0]
+svr000kangaskhan0 ansible_host=10.0.0.150 ansible_user=trustees

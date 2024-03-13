@@ -1,0 +1,86 @@
+---
+# [Install Docker Engine on Debian | Docker Docs](https://docs.docker.com/engine/install/debian/)
+
+- name: Docker をインストールする
+  block:
+  - name: 事前に必要なパッケージをインストール
+    ansible.builtin.apt:
+      name: "{{ item }}"
+      state: present
+    loop:
+    - ca-certificates
+    - curl
+  - name: ディレクトリを作成
+    ansible.builtin.file:
+      path: "/etc/apt/keyrings"
+      state: directory
+      mode: "0755"
+  - name: 鍵をダウンロード
+    ansible.builtin.get_url:
+      url: https://download.docker.com/linux/debian/gpg
+      dest: /etc/apt/keyrings/docker.asc
+      mode: '0644'
+  - name: リポジトリの情報を配付
+    ansible.builtin.template:
+      src: ./etc/apt/sources.list.d/docker.list.j2
+      dest: /etc/apt/sources.list.d/docker.list
+  - name: リポジトリの更新
+    ansible.builtin.apt:
+      update_cache: yes
+    become: yes
+  - name: Docker をインストール
+    ansible.builtin.apt:
+      name: "{{ item }}"
+      state: present
+    loop:
+    - docker-ce
+    - docker-ce-cli
+    - containerd.io
+    - docker-buildx-plugin
+    - docker-compose-plugin
+  become: yes
+  notify:
+  - docker_enable
+  - containerd_enable
+  - docker_restart
+  - containerd_restart
+
+- name: 実行用の設定
+  block:
+  - name: Docker グループを作る
+    ansible.builtin.group:
+      name: docker
+      state: present
+    notify: docker_restart
+  - name: Docker グループにユーザを追加する
+    ansible.builtin.user:
+      name: trustees
+      groups: docker
+      append: yes
+  become: yes
+  notify:
+  - docker_restart
+  - containerd_restart
+
+- name: Ansible Docker の準備
+  block:
+  - name: 事前に必要なパッケージをインストール
+    ansible.builtin.apt:
+      name: "{{ item }}"
+      state: present
+    become: yes
+    loop:
+    - python3-pip
+    - python3-venv
+  - name: Docker をインストールする
+    ansible.builtin.pip:
+      state: present
+      name:
+      - docker>=1.7.0
+      - "pyyaml!=6.0.0,!=5.4.0,!=5.4.1" # docker-compose が依存しているがバージョンによってはビルドがうまくいかないらしいので (https://github.com/yaml/pyyaml/issues/724)
+      - docker-compose>=1.7.0
+      virtualenv: "{{ venv_path }}"
+      virtualenv_command: "python3 -m venv"
+
+
+

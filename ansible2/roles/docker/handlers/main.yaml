@@ -1,0 +1,24 @@
+---
+- name: docker_enable
+  ansible.builtin.systemd:
+    name: docker.service
+    enabled: yes
+  become: yes
+
+- name: containerd_enable
+  ansible.builtin.systemd:
+    name: containerd.service
+    enabled: yes
+  become: yes
+
+- name: docker_restart
+  ansible.builtin.systemd:
+    name: docker.service
+    state: restarted
+  become: yes
+
+- name: containerd_restart
+  ansible.builtin.systemd:
+    name: containerd.service
+    state: restarted
+  become: yes
