@@ -7,6 +7,11 @@ ansible の適用対象は下記を満たしているとして playbook を作�
 - sudo がインストールされている
 - sudoers に追加されたユーザへの ssh ログインが可能
 
+## エラーが見にくい
+参考: [Ansibleのエラー結果を見やすくする"ANSIBLE\_STDOUT\_CALLBACK=yaml"が良いです - もりはやメモφ(・ω・ )](https://blog.morihaya.tech/entry/2019/01/23/002448)
+```shell
+export ANSIBLE_STDOUT_CALLBACK=yaml
+```
 
 
 ## オプション
