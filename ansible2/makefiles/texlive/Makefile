@@ -1,7 +1,7 @@
 
 IMAGENAME := "texlive:latest"
 
-all: texlive2020.tar.gz
+all: texlive2020.tar.gz texlive2021.tar.gz texlive2022.tar.gz texlive2023.tar.gz
 
 ls:
 	docker run -it --rm texlive:2020 ls -l /tmp/install-tl-unx
