@@ -1,0 +1,13 @@
+[Unit]
+Description=Jupyter Lab
+
+[Service]
+Type=simple
+WorkingDirectory=/home/trustees
+ExecStartPre=mkdir -p /home/trustees/work
+ExecStart=/home/trustees/.venv/jupyterlab/bin/jupyter lab --notebook-dir=/home/trustees/work --no-browser --NotebookApp.token='' --ip=0.0.0.0
+User=trustees
+Group=trustees
+
+[Install]
+WantedBy=multi-user.target

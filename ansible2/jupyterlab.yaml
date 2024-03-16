@@ -1,0 +1,9 @@
+---
+- name: jupyterlab
+  hosts: svr000starmie0
+  gather_facts: no
+
+  tasks:
+    - name: jupyterlab
+      ansible.builtin.import_role:
+        name: jupyterlab

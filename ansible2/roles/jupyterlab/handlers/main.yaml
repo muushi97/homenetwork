@@ -1,0 +1,12 @@
+---
+- name: jupyterlab_enable
+  ansible.builtin.systemd:
+    name: jupyterlab.service
+    enabled: yes
+  become: yes
+
+- name: jupyterlab_restart
+  ansible.builtin.systemd:
+    name: jupyterlab.service
+    state: restarted
+  become: yes

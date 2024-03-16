@@ -1,0 +1,49 @@
+---
+- name: JupyterLab のインストール
+  block:
+  - name: 事前に必要なパッケージをインストール
+    ansible.builtin.apt:
+      name: "{{ item }}"
+      state: present
+    become: yes
+    loop:
+    - python3-pip
+    - python3-venv
+  - name: JupyterLab をインストールする
+    ansible.builtin.pip:
+      state: present
+      name:
+      - jupyterlab==4.1.5
+      virtualenv: "/home/trustees/.venv/jupyterlab"
+      virtualenv_command: "python3 -m venv"
+  - name: service ファイルの配付
+    ansible.builtin.copy:
+      src: ./etc/systemd/system/jupyterlab.service
+      dest: /etc/systemd/system/jupyterlab.service
+    become: yes
+  - name: リロード
+    ansible.builtin.systemd:
+      daemon_reload: true
+    become: yes
+  notify:
+  - jupyterlab_enable
+  - jupyterlab_restart
+
+- name: 必要なパッケージ群のインストール
+  block:
+  - name: JupyterLab 関連のパッケージ
+    ansible.builtin.pip:
+      state: present
+      name:
+      - jupyterlab_code_formatter
+      - jupyterlab-git
+      - jupyterlab_vim
+      - jupyterlab_widgets
+      - lckr-jupyterlab-variableinspector
+      - ipywidgets
+      - import-ipynb
+      virtualenv: "/home/trustees/.venv/jupyterlab"
+      virtualenv_command: "python3 -m venv"
+  notify:
+  - jupyterlab_restart
+
