@@ -6,15 +6,16 @@
 - [SSH](./docs/ssh.md)
 - [Docker](./docs/docker.md)
 - [Linux Networking](./docs/linux-networking.md)
+- [Nginx](./docs/nginx.md)
+    - リバースプロキシサーバ
+    - HTTP サーバ
 - [Kea](./docs/kea.md)
     - DHCP サーバ
 - [NSD](./docs/nsd.md)
     - 権威 DNS サーバ
 - [Unbound](./docs/unbound.md)
     - キャッシュ DNS サーバ
-- [Nginx](./docs/nginx.md)
-    - リバースプロキシサーバ
-    - HTTP サーバ
+- [JupyterLab](./docs/jupyterlab.md)
 
 
 
