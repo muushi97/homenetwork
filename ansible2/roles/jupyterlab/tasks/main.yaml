@@ -31,17 +31,77 @@
 
 - name: 必要なパッケージ群のインストール
   block:
-  - name: JupyterLab 関連のパッケージ
+  - name: その他必要なパッケージ
+    block:
+    - name: moviepy が依存するパッケージのインストール
+      ansible.builtin.apt:
+        state: present
+        name:
+        - libpng-dev
+        - libjpeg-dev
+        - libtiff-dev
+        - imagemagick
+        update_cache: yes
+    - name: manim が依存するパッケージのインストール
+      ansible.builtin.apt:
+        state: present
+        name:
+        - build-essential
+        - libcairo2-dev
+        - libpango1.0-dev
+        - ffmpeg
+        - imagemagick
+        update_cache: yes
+    - name: ImageMagick の policy 設定変更
+      ansible.builtin.copy:
+        src: ./etc/ImageMagick-6/policy.xml
+        dest: /etc/ImageMagick-6/policy.xml
+    become: yes
+  - name: Python のパッケージ
     ansible.builtin.pip:
       state: present
       name:
+      - black # コードフォーマッタ ?
       - jupyterlab_code_formatter
-      - jupyterlab-git
+      # jupyterlab-git
       - jupyterlab_vim
       - jupyterlab_widgets
       - lckr-jupyterlab-variableinspector
       - ipywidgets
+      - ipython
       - import-ipynb
+      - ipylab
+      - jupyterlab-language-pack-ja-JP
+
+      - numpy
+      - Pillow
+      - matplotlib
+      - jsonpath-ng
+
+      - pycairo
+      - cairosvg
+
+      - python-sat[aiger,approxmc,cryptosat,pblib]
+
+      - gizeh
+
+      - decorator # TypeError が出る (過去に Docker 上では出た) のでその対策
+      - moviepy
+
+      - manim
+
+      - psd-tools
+      virtualenv: "/home/trustees/.venv/jupyterlab"
+      virtualenv_command: "python3 -m venv"
+  - name: PyTorch のパッケージ # なぜかまとめてインストールできなかったので [Start Locally | PyTorch](https://pytorch.org/get-started/locally/)
+    ansible.builtin.pip:
+      state: present
+      name:
+      - typing-extensions<4.0.0,>=3.7.4 # torch が import しているらしいので
+      - torch
+      - torchvision
+      - torchaudio
+      extra_args: --index-url https://download.pytorch.org/whl/cpu
       virtualenv: "/home/trustees/.venv/jupyterlab"
       virtualenv_command: "python3 -m venv"
   notify:
