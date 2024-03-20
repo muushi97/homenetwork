@@ -33,3 +33,10 @@
     dest: /etc/nsd/silph.internal.zone
   become: yes
   notify: nsd_restart
+
+- name: /etc/nsd/0.0.10.in-addr.arpa.zone を配付する
+  ansible.builtin.template:
+    src: ./etc/nsd/0.0.10.in-addr.arpa.zone.j2
+    dest: /etc/nsd/0.0.10.in-addr.arpa.zone
+  become: yes
+  notify: nsd_restart
