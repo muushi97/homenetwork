@@ -14,6 +14,7 @@ mntr000growlithe0
 mntr000zubat0
 svr000kangaskhan0
 svr000starmie0
+prxy000parasect0
 
 [twohop:children]
 fdns145hitmonlee0
@@ -48,6 +49,7 @@ svr000starmie0
 mgmt000green0
 fdns000hitmonchan0
 mntr000zubat0
+prxy000parasect0
 
 [network-vpn0:children]
 fdns145hitmonlee0
@@ -110,3 +112,6 @@ svr000kangaskhan0 ansible_host=10.0.0.150 ansible_user=trustees
 
 [svr000starmie0]
 svr000starmie0 ansible_host=10.0.0.120 ansible_user=trustees
+
+[prxy000parasect0]
+prxy000parasect0 ansible_host=10.1.0.128 ansible_user=trustees

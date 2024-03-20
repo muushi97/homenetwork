@@ -1,0 +1,9 @@
+---
+- name: proxy
+  hosts: prxy000parasect0
+  gather_facts: no
+
+  tasks:
+    - name: proxy
+      ansible.builtin.import_role:
+        name: proxy

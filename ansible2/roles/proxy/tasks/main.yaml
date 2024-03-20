@@ -1,0 +1,170 @@
+---
+- name: nginx のインストール
+  block:
+  - name: nginx をインストール
+    ansible.builtin.apt:
+      name: nginx
+      state: present
+    become: yes
+  notify:
+  - nginx_enable
+  - nginx_restart
+
+- name: 設定の配付
+  block:
+  - name: ディレクトリの作成
+    ansible.builtin.file:
+      state: directory
+      path: "/etc/nginx/{{ item }}"
+    become: yes
+    loop:
+    - modules-enabled
+    - sites-enabled
+  - name: config を配付する
+    ansible.builtin.template:
+      src: "./etc/nginx/{{ item }}.j2"
+      dest: "/etc/nginx/{{ item }}"
+    become: yes
+    loop:
+    - nginx.conf
+    - mime.types
+    - sites-enabled/default
+    notify: nginx_restart
+
+#- name: 必要なパッケージ群のインストール
+#  block:
+#  - name: JupyterLab 関連のパッケージ
+#    ansible.builtin.pip:
+#      state: present
+#      name:
+#      - black # コードフォーマッタ ?
+#      - jupyterlab_code_formatter
+#      # jupyterlab-git
+#      - jupyterlab_vim
+#      - jupyterlab_widgets
+#      - lckr-jupyterlab-variableinspector
+#      - ipywidgets
+#      - ipython
+#      - import-ipynb
+#      - ipylab
+#      - jupyterlab-language-pack-ja-JP
+#      virtualenv: "/home/trustees/.venv/jupyterlab"
+#      virtualenv_command: "python3 -m venv"
+#  - name: 基本的なパッケージ
+#    ansible.builtin.pip:
+#      state: present
+#      name:
+#      - numpy
+#      - Pillow
+#      - matplotlib
+#      - jsonpath-ng
+#      virtualenv: "/home/trustees/.venv/jupyterlab"
+#      virtualenv_command: "python3 -m venv"
+#  - name: PyTorch のインストール
+#    ansible.builtin.pip:
+#      state: present
+#      name:
+#      - typing_extensions # torch が import しているらしいので
+#      - torch
+#      - torchvision
+#      - torchaudio
+#      virtualenv: "/home/trustees/.venv/jupyterlab"
+#      virtualenv_command: "python3 -m venv"
+#  - name: Cairo のインストール
+#    ansible.builtin.pip:
+#      state: present
+#      name:
+#      - pycairo
+#      - cairosvg
+#      virtualenv: "/home/trustees/.venv/jupyterlab"
+#      virtualenv_command: "python3 -m venv"
+#  - name: python-sat のインストール
+#    ansible.builtin.pip:
+#      state: present
+#      name:
+#      - python-sat[aiger,approxmc,cryptosat,pblib]
+#      virtualenv: "/home/trustees/.venv/jupyterlab"
+#      virtualenv_command: "python3 -m venv"
+#
+#  - name: gizeh のインストール
+#    block:
+#    #- name: 依存するパッケージのインストール
+#    #  ansible.builtin.apt:
+#    #    state: present
+#    #    name: [ ]
+#    #    update_cache: yes
+#    #  become: yes
+#    - name: インストール
+#      ansible.builtin.pip:
+#        state: present
+#        name:
+#        - gizeh
+#        virtualenv: "/home/trustees/.venv/jupyterlab"
+#        virtualenv_command: "python3 -m venv"
+#
+#  - name: moviepy のインストール
+#    block:
+#    - name: 依存するパッケージのインストール
+#      ansible.builtin.apt:
+#        state: present
+#        name:
+#        - libpng-dev
+#        - libjpeg-dev
+#        - libtiff-dev
+#        - imagemagick
+#        update_cache: yes
+#      become: yes
+#    - name: インストール
+#      ansible.builtin.pip:
+#        state: present
+#        name:
+#        - decorator # TypeError が出る (過去に Docker 上では出た) のでその対策
+#        - moviepy
+#        virtualenv: "/home/trustees/.venv/jupyterlab"
+#        virtualenv_command: "python3 -m venv"
+#
+#  - name: manim のインストール
+#    block:
+#    - name: 依存するパッケージのインストール
+#      ansible.builtin.apt:
+#        state: present
+#        name:
+#        - build-essential
+#        - libcairo2-dev
+#        - libpango1.0-dev
+#        - ffmpeg
+#        - imagemagick
+#        update_cache: yes
+#      become: yes
+#    - name: インストール
+#      ansible.builtin.pip:
+#        state: present
+#        name:
+#        - manim
+#        virtualenv: "/home/trustees/.venv/jupyterlab"
+#        virtualenv_command: "python3 -m venv"
+#
+#  - name: ImageMagick の policy 設定変更
+#    ansible.builtin.copy:
+#      src: ./etc/ImageMagick-6/policy.xml
+#      dest: /etc/ImageMagick-6/policy.xml
+#    become: yes
+#
+#  - name: psd-tools のインストール
+#    block:
+#    #- name: 依存するパッケージのインストール
+#    #  ansible.builtin.apt:
+#    #    state: present
+#    #    name: [ ]
+#    #    update_cache: yes
+#    #  become: yes
+#    - name: インストール
+#      ansible.builtin.pip:
+#        state: present
+#        name:
+#        - psd-tools
+#        virtualenv: "/home/trustees/.venv/jupyterlab"
+#        virtualenv_command: "python3 -m venv"
+#  notify:
+#  - jupyterlab_restart
+
