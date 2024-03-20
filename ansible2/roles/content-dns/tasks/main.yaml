@@ -12,9 +12,24 @@
     dest: /etc/nsd/nsd.conf
   become: yes
   notify: nsd_restart
+
 - name: /etc/nsd/maccarello.home.zone を配付する
   ansible.builtin.template:
     src: ./etc/nsd/maccarello.home.zone.j2
     dest: /etc/nsd/maccarello.home.zone
+  become: yes
+  notify: nsd_restart
+
+- name: /etc/nsd/maccarello.internal.zone を配付する
+  ansible.builtin.template:
+    src: ./etc/nsd/maccarello.internal.zone.j2
+    dest: /etc/nsd/maccarello.internal.zone
+  become: yes
+  notify: nsd_restart
+
+- name: /etc/nsd/silph.internal.zone を配付する
+  ansible.builtin.template:
+    src: ./etc/nsd/silph.internal.zone.j2
+    dest: /etc/nsd/silph.internal.zone
   become: yes
   notify: nsd_restart

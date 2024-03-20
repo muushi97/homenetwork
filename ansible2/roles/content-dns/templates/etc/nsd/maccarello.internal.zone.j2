@@ -1,0 +1,18 @@
+$ORIGIN maccarello.internal.
+$TTL 86400
+
+@                   IN  SOA     ns1.maccarello.internal. ns1.maccarello.internal. (
+                                    2021033101      ; serial
+                                    28800           ; refresh
+                                    7200            ; retry
+                                    86400           ; expire
+                                    86400           ; min TTL
+                                    )
+
+                        NS      ns1.maccarello.internal.
+
+prometheus              A       10.1.0.128
+grafana                 A       10.1.0.128
+alertmanager            A       10.1.0.128
+redmine                 A       10.1.0.128
+jupyter                 A       10.1.0.128

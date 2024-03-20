@@ -1,5 +1,9 @@
 ---
 stub_zones:
+- name: "silph.internal."
+  stub_addr: 10.0.0.249
+- name: "maccarello.internal."
+  stub_addr: 10.0.0.249
 - name: "maccarello.home."
   stub_addr: 10.0.0.249
 - name: "0.0.10.in-addr.arpa."
