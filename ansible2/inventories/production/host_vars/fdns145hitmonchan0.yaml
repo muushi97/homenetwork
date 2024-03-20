@@ -4,6 +4,8 @@ stub_zones: [ ]
 forward_zones:
 - name: "silph.internal."
   forward_addr: 10.1.0.251
+- name: "pallet.internal."
+  forward_addr: 10.1.0.251
 - name: "maccarello.internal."
   forward_addr: 10.1.0.251
 - name: "maccarello.home."
